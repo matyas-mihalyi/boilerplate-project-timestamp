@@ -1,9 +1,12 @@
 // server.js
 // where your node app starts
 
+const { formatResponse } = require('./utils.js');
 // init project
 var express = require('express');
 var app = express();
+
+require('dotenv').config();
 
 // enable CORS (https://en.wikipedia.org/wiki/Cross-origin_resource_sharing)
 // so that your API is remotely testable by FCC 
@@ -24,6 +27,11 @@ app.get("/api/hello", function (req, res) {
   res.json({greeting: 'hello API'});
 });
 
+
+app.get("/api/:date?", (req, res) => {  
+  const date = formatResponse(req.params.date);
+  res.json(date);
+});
 
 
 // listen for requests :)
